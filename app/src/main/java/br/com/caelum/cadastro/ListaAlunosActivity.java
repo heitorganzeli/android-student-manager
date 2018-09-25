@@ -13,23 +13,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import br.com.caelum.cadastro.database.AlunoDao;
+import br.com.caelum.cadastro.model.Aluno;
+
 import static android.R.id.list;
 import static android.widget.AdapterView.*;
 
 public class ListaAlunosActivity extends AppCompatActivity {
 
+    private ListView listaAlunos;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
 
-        String[] alunos = {"Anderson", "Filipe", "Guilherme"};
 
-        ListView listaAlunos = (ListView) findViewById(R.id.lista_alunos);
+         listaAlunos = (ListView) findViewById(R.id.lista_alunos);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alunos);
-
-        listaAlunos.setAdapter(adapter);
 
 
         final Context self = this;
@@ -45,7 +47,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
-                String aluno = (String) adapter.getItemAtPosition(position);
+                Aluno aluno = (Aluno) adapter.getItemAtPosition(position);
                 Toast.makeText(self, "aluno: " + aluno, Toast.LENGTH_SHORT).show();
 
                 return true;
@@ -62,6 +64,24 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadAlunos();
+    }
+
+    private void loadAlunos() {
+        CadastroApplication app = (CadastroApplication) getApplication();
+        AlunoDao dao = app.getAlunoDao();
+
+        List<Aluno> alunos = dao.getAll();
+
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+
+        listaAlunos.setAdapter(adapter);
 
     }
 }
