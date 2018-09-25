@@ -34,8 +34,8 @@ public class FormularioHelper {
         aluno.setName(name.getText().toString());
         aluno.setSite(site.getText().toString());
         aluno.setEmail(email.getText().toString());
-        aluno.setRating(rating.getRating());
         aluno.setPhone(phone.getText().toString());
+        aluno.setRating(rating.getRating());
 
         return aluno;
     }
