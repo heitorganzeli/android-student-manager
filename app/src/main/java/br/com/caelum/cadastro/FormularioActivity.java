@@ -11,18 +11,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import br.com.caelum.cadastro.helper.FormularioHelper;
+import br.com.caelum.cadastro.model.Aluno;
+
 /**
  * Created by android7887 on 24/09/18.
  */
 
 public class FormularioActivity extends AppCompatActivity {
+    private FormularioHelper helper;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        this.helper = new FormularioHelper(this);
     }
 
     @Override
@@ -36,7 +43,9 @@ public class FormularioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.form_menu_save:
-                Toast.makeText(FormularioActivity.this, "aluno salvo", Toast.LENGTH_SHORT).show();
+                Aluno aluno = helper.createAlunoFromForm();
+
+                Toast.makeText(FormularioActivity.this, "aluno salvo: " + aluno.getName(), Toast.LENGTH_SHORT).show();
                 finish();
                 return true;
             case android.R.id.home:
