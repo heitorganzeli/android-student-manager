@@ -1,16 +1,14 @@
 package br.com.caelum.cadastro;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import br.com.caelum.cadastro.database.AlunoDao;
 import br.com.caelum.cadastro.helper.FormularioHelper;
 import br.com.caelum.cadastro.model.Aluno;
 
@@ -22,7 +20,7 @@ public class FormularioActivity extends AppCompatActivity {
     private FormularioHelper helper;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
@@ -45,8 +43,14 @@ public class FormularioActivity extends AppCompatActivity {
             case R.id.form_menu_save:
                 Aluno aluno = helper.createAlunoFromForm();
 
-                Toast.makeText(FormularioActivity.this, "aluno salvo: " + aluno.getName(), Toast.LENGTH_SHORT).show();
-                finish();
+                if (helper.verify()) {
+                    save(aluno);
+                    Toast.makeText(FormularioActivity.this, "aluno salvo: " + aluno.getName(), Toast.LENGTH_SHORT).show();
+
+                    finish();
+                } else {
+                    helper.showError();
+                }
                 return true;
             case android.R.id.home:
                 Toast.makeText(FormularioActivity.this, "descartado", Toast.LENGTH_SHORT).show();
@@ -55,5 +59,12 @@ public class FormularioActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void save(Aluno aluno) {
+        CadastroApplication app = (CadastroApplication) getApplication();
+        AlunoDao alunoDao = app.getAlunoDao();
+
+        alunoDao.insert(aluno);
     }
 }

@@ -1,7 +1,12 @@
 package br.com.caelum.cadastro.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Aluno {
 
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
     private String name;
     private String phone;
