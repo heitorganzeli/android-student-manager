@@ -41,9 +41,8 @@ public class FormularioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.form_menu_save:
-                Aluno aluno = helper.createAlunoFromForm();
-
                 if (helper.verify()) {
+                    Aluno aluno = helper.createAlunoFromForm();
                     save(aluno);
                     Toast.makeText(FormularioActivity.this, "aluno salvo: " + aluno.getName(), Toast.LENGTH_SHORT).show();
 
@@ -51,6 +50,7 @@ public class FormularioActivity extends AppCompatActivity {
                 } else {
                     helper.showError();
                 }
+
                 return true;
             case android.R.id.home:
                 Toast.makeText(FormularioActivity.this, "descartado", Toast.LENGTH_SHORT).show();
