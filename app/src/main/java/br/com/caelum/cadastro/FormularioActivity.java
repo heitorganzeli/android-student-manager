@@ -1,12 +1,18 @@
 package br.com.caelum.cadastro;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
+
+import java.io.File;
 
 import br.com.caelum.cadastro.database.AlunoDao;
 import br.com.caelum.cadastro.helper.FormularioHelper;
@@ -17,7 +23,9 @@ import br.com.caelum.cadastro.model.Aluno;
  */
 
 public class FormularioActivity extends AppCompatActivity {
+    private static final int PICTURE_REQUEST = 1;
     private FormularioHelper helper;
+    private String picturePath;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +41,18 @@ public class FormularioActivity extends AppCompatActivity {
             Aluno student = (Aluno) getIntent().getSerializableExtra("student");
             helper.show(student);
         }
+
+        helper.getPictureButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                picturePath = getExternalFilesDir("pictures") + "/" + System.currentTimeMillis() + ".jpg";
+                camera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(picturePath)));
+
+                startActivityForResult(camera, PICTURE_REQUEST);
+            }
+        });
     }
 
     @Override
@@ -63,6 +83,15 @@ public class FormularioActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == PICTURE_REQUEST) {
+            if(resultCode == RESULT_OK) {
+                helper.loadImage(picturePath);
+            }
         }
     }
 

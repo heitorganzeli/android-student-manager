@@ -1,7 +1,13 @@
 package br.com.caelum.cadastro.helper;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import br.com.caelum.cadastro.FormularioActivity;
@@ -18,6 +24,10 @@ public class FormularioHelper {
     private final EditText site;
     private final EditText phone;
     private final RatingBar rating;
+    private final ImageView picture;
+
+
+    private final FloatingActionButton pictureButton;
     private Aluno student;
 
     public FormularioHelper(FormularioActivity a) {
@@ -28,6 +38,8 @@ public class FormularioHelper {
         this.site = a.findViewById(R.id.form_site);
         this.phone = a.findViewById(R.id.form_phone);
         this.rating = a.findViewById(R.id.form_rating);
+        this.pictureButton = a.findViewById(R.id.form_upload_picture_button);
+        this.picture = a.findViewById(R.id.form_picture);
 
         this.student = new Aluno();
     }
@@ -42,6 +54,14 @@ public class FormularioHelper {
         student.setRating(rating.getRating());
 
         return student;
+    }
+
+    public void loadImage(String picturePath) {
+        Bitmap bm = BitmapFactory.decodeFile(picturePath);
+
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bm, bm.getWidth(), bm.getHeight(), true);
+
+        picture.setImageBitmap(scaledBitmap);
     }
 
     public boolean verify() {
@@ -64,4 +84,9 @@ public class FormularioHelper {
         phone.setText(student.getPhone());
         rating.setRating(student.getRating());
     }
+
+    public FloatingActionButton getPictureButton() {
+        return pictureButton;
+    }
+
 }
