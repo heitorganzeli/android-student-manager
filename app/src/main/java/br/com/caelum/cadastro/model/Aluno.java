@@ -3,8 +3,10 @@ package br.com.caelum.cadastro.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Aluno {
+public class Aluno implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private Integer id;

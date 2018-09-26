@@ -44,7 +44,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
         listaAlunos.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View item, int position, long id) {
-                Toast.makeText(self, "position " + position, Toast.LENGTH_SHORT).show();
+                Aluno student = (Aluno) listaAlunos.getItemAtPosition(position);
+                Intent edit = new Intent(self, FormularioActivity.class);
+                edit.putExtra("student", student);
+
+                startActivity(edit);
             }
         });
 

@@ -1,7 +1,6 @@
 package br.com.caelum.cadastro.helper;
 
 import android.support.design.widget.TextInputLayout;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
@@ -19,6 +18,7 @@ public class FormularioHelper {
     private final EditText site;
     private final EditText phone;
     private final RatingBar rating;
+    private Aluno student;
 
     public FormularioHelper(FormularioActivity a) {
         this.address = a.findViewById(R.id.form_address);
@@ -28,19 +28,20 @@ public class FormularioHelper {
         this.site = a.findViewById(R.id.form_site);
         this.phone = a.findViewById(R.id.form_phone);
         this.rating = a.findViewById(R.id.form_rating);
+
+        this.student = new Aluno();
     }
 
     public Aluno createAlunoFromForm() {
-        Aluno aluno = new Aluno();
 
-        aluno.setAddress(address.getText().toString().trim());
-        aluno.setName(name.getText().toString().trim());
-        aluno.setSite(site.getText().toString().trim());
-        aluno.setEmail(email.getText().toString().trim());
-        aluno.setPhone(phone.getText().toString().trim());
-        aluno.setRating(rating.getRating());
+        student.setAddress(address.getText().toString().trim());
+        student.setName(name.getText().toString().trim());
+        student.setSite(site.getText().toString().trim());
+        student.setEmail(email.getText().toString().trim());
+        student.setPhone(phone.getText().toString().trim());
+        student.setRating(rating.getRating());
 
-        return aluno;
+        return student;
     }
 
     public boolean verify() {
@@ -51,5 +52,16 @@ public class FormularioHelper {
     public void showError() {
         tilName.setError("Campo Obrigatorio");
         name.requestFocus();
+    }
+
+    public void show(Aluno student) {
+        this.student = student;
+
+        name.setText(student.getName());
+        address.setText(student.getAddress());
+        site.setText(student.getSite());
+        email.setText(student.getEmail());
+        phone.setText(student.getPhone());
+        rating.setRating(student.getRating());
     }
 }

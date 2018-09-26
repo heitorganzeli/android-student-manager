@@ -28,6 +28,11 @@ public class FormularioActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         this.helper = new FormularioHelper(this);
+
+        if(getIntent().hasExtra("student")) {
+            Aluno student = (Aluno) getIntent().getSerializableExtra("student");
+            helper.show(student);
+        }
     }
 
     @Override
@@ -65,6 +70,11 @@ public class FormularioActivity extends AppCompatActivity {
         CadastroApplication app = (CadastroApplication) getApplication();
         AlunoDao alunoDao = app.getAlunoDao();
 
-        alunoDao.insert(aluno);
+        if (aluno.getId() == null) {
+            alunoDao.insert(aluno);
+        } else {
+            alunoDao.update(aluno);
+        }
+
     }
 }
