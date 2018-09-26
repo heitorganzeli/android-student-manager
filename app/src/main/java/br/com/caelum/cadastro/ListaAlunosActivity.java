@@ -3,6 +3,7 @@ package br.com.caelum.cadastro;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -65,6 +66,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
 
         registerForContextMenu(listaAlunos);
+        Permission.checkPermissions(this);
 
     }
 
@@ -93,15 +95,39 @@ public class ListaAlunosActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        menu.add("Ligar");
-        menu.add("Enviar SMS");
-        menu.add("Achar no Mapa");
-        menu.add("Navegar no Site");
+        MenuItem call = menu.add("Ligar");
+        MenuItem sms = menu.add("Enviar SMS");
+        MenuItem map = menu.add("Achar no Mapa");
+        MenuItem site = menu.add("Navegar no Site");
         MenuItem delete = menu.add("Deletar");
 
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 
         final Aluno selectedStudent = (Aluno) listaAlunos.getItemAtPosition(info.position);
+
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + selectedStudent.getPhone()));
+        call.setIntent(callIntent);
+
+        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
+        smsIntent.setData(Uri.parse("sms:" + selectedStudent.getPhone()));
+        smsIntent.putExtra("sms_body", "voce foi matriculado");
+        sms.setIntent(smsIntent);
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        mapIntent.setData(Uri.parse("geo:0,0?q=" + selectedStudent.getAddress()));
+        map.setIntent(mapIntent);
+
+
+        Intent siteIntent = new Intent(Intent.ACTION_VIEW);
+        String urlString = selectedStudent.getSite();
+        if (!urlString.startsWith("http://")) {
+            urlString = "http://" + urlString;
+        }
+        siteIntent.setData(Uri.parse(urlString));
+        site.setIntent(siteIntent);
+
+
 
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
