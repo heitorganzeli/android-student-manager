@@ -23,4 +23,7 @@ public interface AlunoDao {
 
     @Update
     void update(Aluno aluno);
+
+    @Query("select count(*) from Aluno where phone = :phone")
+    Integer existsPhone(String phone);
 }
