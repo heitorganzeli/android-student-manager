@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/list_menu_map"
+        android:title="Mapa"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_mapa"/>
+
+    <item
+        android:id="@+id/list_menu_fetch_exams"
+        android:title="Baixar provas"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_receber"/>
+
+    <item
+        android:id="@+id/list_menu_send_ratings"
+        android:title="Enviar Notas"
+        app:showAsAction="never"
+        android:icon="@drawable/ic_enviar"/>
+</menu>
