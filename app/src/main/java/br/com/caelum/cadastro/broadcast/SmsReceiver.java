@@ -15,10 +15,16 @@ public class SmsReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         Object[] pdus = (Object[]) intent.getSerializableExtra("pdus");
+        String format = (String) intent.getSerializableExtra("format");
 
         byte[] pdu = (byte[]) pdus[0];
 
-        SmsMessage message = SmsMessage.createFromPdu(pdu);
+        SmsMessage message = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            message = SmsMessage.createFromPdu(pdu, format);
+        } else {
+            message = SmsMessage.createFromPdu(pdu);
+        }
 
         CadastroApplication app = (CadastroApplication) context.getApplicationContext();
         AlunoDao dao = app.getAlunoDao();

@@ -5,7 +5,12 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.migration.Migration;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.widget.Toast;
 
 import br.com.caelum.cadastro.database.AlunoDao;
 import br.com.caelum.cadastro.database.CadastroDatabase;
