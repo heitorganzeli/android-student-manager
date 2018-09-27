@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,16 +14,14 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
+import br.com.caelum.cadastro.adapter.StudentAdatpter;
 import br.com.caelum.cadastro.database.AlunoDao;
 import br.com.caelum.cadastro.model.Aluno;
 
-import static android.R.id.list;
 import static android.widget.AdapterView.*;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -81,7 +78,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
         List<Aluno> alunos = dao.getAll();
 
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        StudentAdatpter adapter = new StudentAdatpter(this, alunos);
 
         listaAlunos.setAdapter(adapter);
     }

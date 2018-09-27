@@ -52,6 +52,7 @@ public class FormularioHelper {
         student.setEmail(email.getText().toString().trim());
         student.setPhone(phone.getText().toString().trim());
         student.setRating(rating.getRating());
+        student.setPicturePath((String) picture.getTag());
 
         return student;
     }
@@ -62,6 +63,7 @@ public class FormularioHelper {
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bm, bm.getWidth(), bm.getHeight(), true);
 
         picture.setImageBitmap(scaledBitmap);
+        picture.setTag(picturePath);
     }
 
     public boolean verify() {
@@ -83,6 +85,10 @@ public class FormularioHelper {
         email.setText(student.getEmail());
         phone.setText(student.getPhone());
         rating.setRating(student.getRating());
+
+        if (student.getPicturePath() != null) {
+            loadImage(student.getPicturePath());
+        }
     }
 
     public FloatingActionButton getPictureButton() {

@@ -5,7 +5,7 @@ import android.arch.persistence.room.RoomDatabase;
 
 import br.com.caelum.cadastro.model.Aluno;
 
-@Database(entities = {Aluno.class}, version = 1)
+@Database(entities = {Aluno.class}, version = 2)
 public abstract class CadastroDatabase extends RoomDatabase {
     public abstract AlunoDao getAlunoDao();
 }

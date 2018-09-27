@@ -15,6 +15,7 @@ public class Aluno implements Serializable {
     private String address;
     private String email;
     private String site;
+    private String picturePath;
     private Float rating;
 
     public Integer getId() {
@@ -71,6 +72,15 @@ public class Aluno implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     @Override
