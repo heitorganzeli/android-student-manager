@@ -6,6 +6,7 @@ public class Exam {
 
     private Date date;
     private String subject;
+    private String description;
 
     public Exam(Date date, String suject) {
         this.date = date;
@@ -27,6 +28,14 @@ public class Exam {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
