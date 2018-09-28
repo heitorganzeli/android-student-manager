@@ -1,4 +1,4 @@
-package br.com.caelum.cadastro;
+package br.com.caelum.cadastro.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,16 +16,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
+import br.com.caelum.cadastro.CadastroApplication;
+import br.com.caelum.cadastro.Permission;
+import br.com.caelum.cadastro.R;
 import br.com.caelum.cadastro.adapter.StudentAdatpter;
 import br.com.caelum.cadastro.converter.AlunoConverter;
 import br.com.caelum.cadastro.database.AlunoDao;
 import br.com.caelum.cadastro.model.Aluno;
 import br.com.caelum.cadastro.service.SendStudentsTask;
-import br.com.caelum.cadastro.service.WebClient;
 
 import static android.widget.AdapterView.*;
 
@@ -90,7 +91,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
                 new SendStudentsTask(this).execute(converter.toJSON(students));
 
-            return true;
+                return true;
+            case R.id.list_menu_fetch_exams:
+                Intent examsIntent = new Intent(this, ExamsActivity.class);
+                startActivity(examsIntent);
+                return true;
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -153,7 +158,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
         }
         siteIntent.setData(Uri.parse(urlString));
         site.setIntent(siteIntent);
-
 
 
         delete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {

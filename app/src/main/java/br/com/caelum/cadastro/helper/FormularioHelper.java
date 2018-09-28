@@ -2,15 +2,13 @@ package br.com.caelum.cadastro.helper;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
-import br.com.caelum.cadastro.FormularioActivity;
+import br.com.caelum.cadastro.activity.FormularioActivity;
 import br.com.caelum.cadastro.R;
 import br.com.caelum.cadastro.model.Aluno;
 

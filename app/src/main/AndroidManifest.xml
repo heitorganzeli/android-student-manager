@@ -14,16 +14,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListaAlunosActivity">
+        <activity android:name=".activity.ListaAlunosActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FormularioActivity" >
+        <activity android:name=".activity.FormularioActivity" >
 
         </activity>
+        <activity android:name=".activity.ExamsActivity" />
 
         <receiver android:name=".broadcast.SmsReceiver">
             <intent-filter>
