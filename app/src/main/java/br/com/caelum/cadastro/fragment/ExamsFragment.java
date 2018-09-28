@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.caelum.cadastro.R;
+import br.com.caelum.cadastro.activity.ExamsActivity;
 import br.com.caelum.cadastro.model.Exam;
 
 public class ExamsFragment extends Fragment {
@@ -31,6 +33,15 @@ public class ExamsFragment extends Fragment {
         ArrayAdapter<Exam> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, listExams());
 
         examsList.setAdapter(adapter);
+
+        examsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long l) {
+                Exam exam = (Exam) adapter.getItemAtPosition(position);
+                ExamsActivity activity = (ExamsActivity) getActivity();
+                activity.selectExam(exam);
+            }
+        });
 
         return view;
     }

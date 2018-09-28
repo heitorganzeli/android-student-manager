@@ -1,8 +1,9 @@
 package br.com.caelum.cadastro.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Exam {
+public class Exam implements Serializable {
 
     private Date date;
     private String subject;
@@ -40,8 +41,6 @@ public class Exam {
 
     @Override
     public String toString() {
-        return "Exam{" +
-                "subject='" + subject + '\'' +
-                '}';
+        return subject;
     }
 }
