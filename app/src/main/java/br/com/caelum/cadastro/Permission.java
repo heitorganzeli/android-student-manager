@@ -17,6 +17,7 @@ public class Permission {
                 Manifest.permission.RECEIVE_SMS,
                 Manifest.permission.INTERNET,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_FINE_LOCATION,
         };
 
         for (String permission : permissions) {

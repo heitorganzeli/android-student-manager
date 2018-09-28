@@ -14,6 +14,7 @@ import java.util.List;
 
 import br.com.caelum.cadastro.CadastroApplication;
 import br.com.caelum.cadastro.database.AlunoDao;
+import br.com.caelum.cadastro.gps.Gps;
 import br.com.caelum.cadastro.model.Aluno;
 
 public class MapFragment extends SupportMapFragment {
@@ -25,6 +26,9 @@ public class MapFragment extends SupportMapFragment {
         getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
+
+                Gps gps = new Gps(getContext(), googleMap);
+                gps.initSearch();
                 CadastroApplication app = (CadastroApplication) getActivity().getApplication();
 
                 AlunoDao dao = app.getAlunoDao();
