@@ -92,6 +92,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 new SendStudentsTask(this).execute(converter.toJSON(students));
 
                 return true;
+
             case R.id.list_menu_fetch_exams:
                 Intent examsIntent = new Intent(this, ExamsActivity.class);
                 startActivity(examsIntent);
