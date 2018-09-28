@@ -97,6 +97,11 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 startActivity(examsIntent);
                 return true;
 
+            case R.id.list_menu_map:
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
